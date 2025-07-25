@@ -1,0 +1,24 @@
+﻿@model WebServer_DoAn.ViewModel.SinhVienViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết Sinh Viên";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>👀 @ViewData["Title"]</h2>
+
+<table class="table table-bordered">
+    <tr><th>Mã SV</th><td>@Model.MaSV</td></tr>
+    <tr><th>Họ tên</th><td>@Model.HoTen</td></tr>
+    <tr><th>Ngày sinh</th><td>@Model.NgaySinh?.ToString("dd/MM/yyyy")</td></tr>
+    <tr><th>Giới tính</th><td>@Model.GioiTinh</td></tr>
+    <tr><th>Quê quán</th><td>@Model.QueQuan</td></tr>
+    <tr><th>Email</th><td>@Model.Email</td></tr>
+    <tr><th>SĐT</th><td>@Model.SDT</td></tr>
+    <tr><th>Tình trạng</th><td>@Model.TinhTrang</td></tr>
+    <tr><th>Lớp</th><td>@Model.MaLop</td></tr>
+    <tr><th>Tài khoản</th><td>@Model.TaiKhoanDangNhap</td></tr>
+</table>
+
+<a asp-action="Edit" asp-route-id="@Model.MaSV" class="btn btn-warning">Sửa</a>
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>

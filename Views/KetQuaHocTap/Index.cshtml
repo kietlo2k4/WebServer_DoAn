@@ -1,0 +1,89 @@
+﻿@model List<WebServer_DoAn.ViewModel.KetQuaHocTapViewModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản lý kết quả học tập";
+}
+
+<h2>📚 @ViewData["Title"]</h2>
+
+<form method="get" asp-action="Index">
+    <div class="row">
+        <div class="col-md-4">
+            <label>Khoa</label>
+            @Html.DropDownList("maKhoa", (SelectList)ViewBag.Khoas, "-- Chọn Khoa --", new { @class = "form-control", onchange = "this.form.submit()" })
+        </div>
+
+        <div class="col-md-4">
+            <label>Ngành</label>
+            @Html.DropDownList("maNganh", (SelectList)ViewBag.Nganhs, "-- Chọn Ngành --", new { @class = "form-control", onchange = "this.form.submit()" })
+        </div>
+
+        <div class="col-md-4">
+            <label>Lớp học phần</label>
+            @Html.DropDownList("maLopHP", (SelectList)ViewBag.LopHocPhans, "-- Chọn Lớp Học Phần --", new { @class = "form-control", onchange = "this.form.submit()" })
+        </div>
+    </div>
+</form>
+
+<hr />
+
+@if (!string.IsNullOrEmpty((string)ViewBag.SelectedLopHP))
+{
+    <form asp-action="CapNhatDiem" method="post">
+        <input type="hidden" name="maKhoa" value="@Context.Request.Query["maKhoa"]" />
+        <input type="hidden" name="maNganh" value="@Context.Request.Query["maNganh"]" />
+        <input type="hidden" name="maLopHP" value="@Context.Request.Query["maLopHP"]" />
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>MSSV</th>
+                    <th>Họ tên</th>
+                    <th>Môn học</th>
+                    <th>Điểm CC</th>
+                    <th>Điểm GK</th>
+                    <th>Điểm CK</th>
+                    <th>Điểm Tổng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].MaSV</td>
+                        <td>@Model[i].HoTen</td>
+                        <td>@Model[i].TenMonHoc</td>
+
+                        <td>
+                            <input type="number" step="0.1" name="diems[@i].DiemCC" value="@Model[i].DiemCC" class="form-control" />
+                            <input type="hidden" name="diems[@i].MaDangKy" value="@Model[i].MaDangKy" />
+                        </td>
+                        <td>
+                            <input type="number" step="0.1" name="diems[@i].DiemGK" value="@Model[i].DiemGK" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="number" step="0.1" name="diems[@i].DiemCK" value="@Model[i].DiemCK" class="form-control" />
+                        </td>
+                        <td>@Model[i].DiemTongKet?.ToString("0.00")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-success">💾 Cập nhật điểm</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-info mt-3">
+        Vui lòng chọn Khoa → Ngành → Lớp học phần để xem và cập nhật điểm.
+    </div>
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success mt-3">
+        @TempData["Message"]
+    </div>
+}

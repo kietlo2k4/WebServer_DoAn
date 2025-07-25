@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebServer_DoAn.Models.ThanhToan>
+
+@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Học phí";
+
+    var tongDaThanhToan = Model.Where(x => x.TrangThai == "Đã thanh toán" && x.SoTien.HasValue)
+                                .Sum(x => x.SoTien.Value);
+
+    var tongChuaThanhToan = Model.Where(x => x.TrangThai != "Đã thanh toán" && x.SoTien.HasValue)
+                                  .Sum(x => x.SoTien.Value);
+}
+
+<h2 class="mt-3">💰 Học phí</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info mt-3">
+        Bạn chưa có dữ liệu học phí.
+    </div>
+}
+else
+{
+    <a asp-action="XuatHocPhiPDF" class="btn btn-success mb-3">📥 Xuất Hoc Phi PDF</a>
+
+    <table class="table table-striped mt-3">
+        <thead class="table-primary">
+            <tr>
+                <th>Môn học</th>
+                <th>Số tiền</th>
+                <th>Ngày thanh toán</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.LopHocPhan?.MonHoc?.TenMonHoc</td>
+                    <td>@(item.SoTien.HasValue ? string.Format("{0:N0}", item.SoTien) : "0") đ</td>
+                    <td>@(item.NgayThanhToan?.ToString("dd/MM/yyyy") ?? "Chưa thanh toán")</td>
+                    <td>@item.TrangThai</td>
+                    <td>
+                        @if (item.TrangThai != "Đã thanh toán")
+                        {
+                            <a asp-action="ThanhToanQR" asp-route-maThanhToan="@item.MaThanhToan" target="_blank" class="btn btn-primary btn-sm">
+                                🔗 Thanh toán QR
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-success">✅ Đã thanh toán</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="mt-4">
+        <h5>📝 Tổng kết</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                ✅ <strong>Tổng đã thanh toán:</strong> @string.Format("{0:N0}", tongDaThanhToan) đ
+            </li>
+            <li class="list-group-item">
+                🔷 <strong>Tổng chưa thanh toán:</strong> @string.Format("{0:N0}", tongChuaThanhToan) đ
+            </li>
+        </ul>
+    </div>
+}

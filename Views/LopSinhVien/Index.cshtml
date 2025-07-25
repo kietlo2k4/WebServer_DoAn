@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebServer_DoAn.ViewModel.LopSinhVienViewModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa Lớp Sinh Viên";
+}
+<h2>📋 Danh sách lớp sinh viên</h2>
+
+<form method="get" class="mb-3">
+    <label for="maNganh">Ngành</label>
+    <select name="maNganh" onchange="this.form.submit()">
+        <option value="">-- Tất cả --</option>
+        @foreach (var item in (SelectList)ViewData["MaNganh"])
+        {
+            <option value="@item.Value" selected="@(item.Selected)">
+                @item.Text
+            </option>
+        }
+    </select>
+</form>
+
+<a asp-action="Create" class="btn btn-success mb-3">➕ Thêm lớp</a>
+
+<table class="table table-bordered">
+    <thead class="table-primary">
+        <tr>
+            <th>Mã lớp</th>
+            <th>Tên lớp</th>
+            <th>Khóa học</th>
+            <th>Mã ngành</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var l in Model)
+        {
+            <tr>
+                <td>@l.MaLop</td>
+                <td>@l.TenLop</td>
+                <td>@l.KhoaHoc</td>
+                <td>@l.MaNganh</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@l.MaLop" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@l.MaLop" class="btn btn-info btn-sm">Xem</a>
+                    <a asp-action="Delete" asp-route-id="@l.MaLop" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

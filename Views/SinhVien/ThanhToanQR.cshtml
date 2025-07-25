@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Mã QR thanh toán";
+}
+
+<h2>📷 Quét mã QR để thanh toán</h2>
+
+<div class="text-center mt-3">
+    <img src="@ViewBag.QRBase64" alt="QR Code" />
+    <p class="mt-3"><strong>Nội dung:</strong> @ViewBag.NoiDung</p>
+    <p><strong>STK:</strong> @ViewBag.STK</p>
+    <p><strong>Tên người nhận:</strong> @ViewBag.TenNguoiNhan</p>
+</div>

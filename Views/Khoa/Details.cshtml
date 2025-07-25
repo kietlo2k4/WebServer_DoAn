@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chi tiết Khoa";
+    var khoa = ViewBag.Khoa as WebServer_DoAn.Models.Khoa;
+    var nganhs = ViewBag.Nganhs as IEnumerable<WebServer_DoAn.Models.Nganh>;
+}
+
+<h2>📄 Chi tiết Khoa</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Mã Khoa</th>
+        <td>@khoa.MaKhoa</td>
+    </tr>
+    <tr>
+        <th>Tên Khoa</th>
+        <td>@khoa.TenKhoa</td>
+    </tr>
+</table>
+
+<hr />
+
+<h3>📚 Danh sách Ngành của Khoa</h3>
+
+@if (!nganhs.Any())
+{
+    <div class="alert alert-warning">🚫 Khoa này chưa có ngành nào.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã Ngành</th>
+                <th>Tên Ngành</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nganh in nganhs)
+            {
+                <tr>
+                    <td>@nganh.MaNganh</td>
+                    <td>@nganh.TenNganh</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Index" class="btn btn-secondary">⬅ Quay lại danh sách</a>

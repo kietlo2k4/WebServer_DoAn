@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebServer_DoAn.Models.ChuongTrinhKhung>
+
+@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Chương Trình Khung";
+}
+
+<h2 class="mt-3">📚 Chương trình khung</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Không có dữ liệu chương trình khung.
+    </div>
+}
+else
+{
+    var grouped = Model.GroupBy(c => c.HocKy);
+    foreach (var hocKyGroup in grouped)
+    {
+        <h4 class="mt-4 text-primary">Học kỳ @hocKyGroup.Key</h4>
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Môn học</th>
+                    <th>Số tín chỉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in hocKyGroup)
+                {
+                    <tr>
+                        <td>@item.MonHoc?.TenMonHoc</td>
+                        <td>@(item.MonHoc?.SoTinChi ?? 0)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

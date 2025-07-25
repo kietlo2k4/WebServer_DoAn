@@ -1,0 +1,24 @@
+﻿@model WebServer_DoAn.ViewModel.KhoaViewModel
+
+@{
+    ViewData["Title"] = "Xoá Khoa";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>❌ @ViewData["Title"]</h2>
+
+<p>Bạn có chắc muốn xoá khoa này?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Mã Khoa</dt>
+    <dd class="col-sm-9">@Model.MaKhoa</dd>
+
+    <dt class="col-sm-3">Tên Khoa</dt>
+    <dd class="col-sm-9">@Model.TenKhoa</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="MaKhoa" />
+    <button type="submit" class="btn btn-danger">Xoá</button>
+    <a asp-action="Index" class="btn btn-secondary">Huỷ</a>
+</form>

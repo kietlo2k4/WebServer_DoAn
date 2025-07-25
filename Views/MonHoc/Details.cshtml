@@ -1,0 +1,33 @@
+﻿@model WebServer_DoAn.Models.MonHoc
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chi tiết Môn học";
+}
+
+<h2>📄 Chi tiết Môn học</h2>
+
+<dl class="row">
+    <dt class="col-sm-3">Mã Môn</dt>
+    <dd class="col-sm-9">@Model.MaMonHoc</dd>
+
+    <dt class="col-sm-3">Tên Môn</dt>
+    <dd class="col-sm-9">@Model.TenMonHoc</dd>
+
+    <dt class="col-sm-3">Loại Môn</dt>
+    <dd class="col-sm-9">@Model.LoaiMon</dd>
+
+    <dt class="col-sm-3">Số tiết</dt>
+    <dd class="col-sm-9">@Model.SoTiet</dd>
+
+    <dt class="col-sm-3">Số tín chỉ</dt>
+    <dd class="col-sm-9">@Model.SoTinChi</dd>
+
+    <dt class="col-sm-3">Môn tiên quyết</dt>
+    <dd class="col-sm-9">@Model.MaMonTienQuyet</dd>
+
+    <dt class="col-sm-3">Ngành</dt>
+    <dd class="col-sm-9">@Model.Nganh?.TenNganh</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>

@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Trang chủ Admin";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary text-center">🎓 Quản lý Hệ thống Sinh viên</h2>
+
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-primary">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">👥 Sinh viên</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewData["TongSinhVien"]</p>
+                    <a asp-controller="QLSinhVien" asp-action="Index" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-success">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">🏢 Khoa</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewData["TongKhoa"]</p>
+                    <a asp-controller="Khoa" asp-action="Index" class="btn btn-success btn-sm">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-warning">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">📚 Ngành</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewData["TongNganh"]</p>
+                    <a asp-controller="Nganh" asp-action="Index" class="btn btn-warning btn-sm">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-info">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">🏫 Lớp</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewData["TongLop"]</p>
+                    <a asp-controller="LopSinhVien" asp-action="Index" class="btn btn-info btn-sm">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-dark">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-dark">📖 Lớp học phần</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewData["TongLopHP"]</p>
+                    <a asp-controller="LopHocPhan" asp-action="Index" class="btn btn-dark btn-sm">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-secondary">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-secondary">📘 Môn học</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewData["TongMonHoc"]</p>
+                    <a asp-controller="MonHoc" asp-action="Index" class="btn btn-secondary btn-sm">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <p class="text-muted text-center">
+            📌 Chào mừng bạn đến với hệ thống quản lý sinh viên. Sử dụng menu bên trái để quản lý các chức năng.
+        </p>
+    </div>
+</div>

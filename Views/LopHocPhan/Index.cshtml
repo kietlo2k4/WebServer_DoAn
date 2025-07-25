@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WebServer_DoAn.Models.LopHocPhan>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản lý Lớp Học Phần";
+}
+
+<h2>📚 Danh sách Lớp Học Phần</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form method="get" asp-action="Index" class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label>Khoa</label>
+        <select name="maKhoa" class="form-select" onchange="this.form.submit()" asp-items="ViewBag.MaKhoa">
+            <option value="">-- Tất cả Khoa --</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label>Ngành</label>
+        <select name="maNganh" class="form-select" onchange="this.form.submit()" asp-items="ViewBag.MaNganh">
+            <option value="">-- Tất cả Ngành --</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label>Môn học</label>
+        <select name="maMonHoc" class="form-select" onchange="this.form.submit()" asp-items="ViewBag.MaMonHoc">
+            <option value="">-- Tất cả Môn học --</option>
+        </select>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>Mã Lớp HP</th>
+            <th>Môn học</th>
+            <th>Phòng</th>
+            <th>Thứ</th>
+            <th>Tiết</th>
+            <th>SL Đăng ký / Tối đa</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="8" class="text-center text-danger">Không có dữ liệu.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaLopHP</td>
+                    <td>@item.MonHoc?.TenMonHoc</td>
+                    <td>@item.PhongHoc</td>
+                    <td>@item.Thu</td>
+                    <td>@item.TietBatDau - @item.TietKetThuc</td>
+                    <td>@item.SoLuongDangKy / @item.SoLuongToiDa</td>
+                    <td>
+                        @if (item.TrangThai == "Mở")
+                        {
+                            <span class="badge bg-success">Mở</span>
+                        }
+                        else if (item.TrangThai == "Đã đóng")
+                        {
+                            <span class="badge bg-danger">Đã đóng</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@item.TrangThai</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MaLopHP" class="btn btn-warning btn-sm">Sửa</a>
+                        <a asp-action="Details" asp-route-id="@item.MaLopHP" class="btn btn-info btn-sm">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.MaLopHP" class="btn btn-danger btn-sm">Xoá</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<a asp-action="MoLop" class="btn btn-primary mt-3">➕ Mở Lớp Học Phần</a>

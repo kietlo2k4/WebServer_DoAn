@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WebServer_DoAn.ViewModel.SinhVienViewModel>
+
+@{
+    ViewData["Title"] = "Quản lý Sinh Viên";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>📋 Quản lý Sinh Viên</h2>
+
+<form method="get" asp-action="Index" class="row g-3 mb-4">
+    <!-- Khoa -->
+    <div class="col-md-4">
+        <label class="form-label">Khoa</label>
+        <select name="maKhoa" class="form-select" onchange="this.form.submit()">
+            <option value="">-- Chọn Khoa --</option>
+            @foreach (var item in (SelectList)ViewData["MaKhoa"])
+            {
+                <option value="@item.Value" selected="@(item.Selected)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Ngành -->
+    <div class="col-md-4">
+        <label class="form-label">Ngành</label>
+        <select name="maNganh" class="form-select" onchange="this.form.submit()">
+            <option value="">-- Chọn Ngành --</option>
+            @foreach (var item in (SelectList)ViewData["MaNganh"])
+            {
+                <option value="@item.Value" selected="@(item.Selected)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Lớp -->
+    <div class="col-md-4">
+        <label class="form-label">Lớp</label>
+        <select name="maLop" class="form-select" onchange="this.form.submit()">
+            <option value="">-- Chọn Lớp --</option>
+            @foreach (var item in (SelectList)ViewData["MaLop"])
+            {
+                <option value="@item.Value" selected="@(item.Selected)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+</form>
+
+<a asp-action="Create" class="btn btn-success mb-3">➕ Thêm Sinh Viên</a>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">🚫 Không có sinh viên nào.</div>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>Mã SV</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Email</th>
+                <th>SĐT</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sv in Model)
+            {
+                <tr>
+                    <td>@sv.MaSV</td>
+                    <td>@sv.HoTen</td>
+                    <td>@(sv.NgaySinh?.ToString("dd/MM/yyyy"))</td>
+                    <td>@sv.GioiTinh</td>
+                    <td>@sv.Email</td>
+                    <td>@sv.SDT</td>
+                    <td>@sv.TinhTrang</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@sv.MaSV" class="btn btn-warning btn-sm">Sửa</a>
+                        <a asp-action="Details" asp-route-id="@sv.MaSV" class="btn btn-info btn-sm">Xem</a>
+                        <a asp-action="Delete" asp-route-id="@sv.MaSV" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

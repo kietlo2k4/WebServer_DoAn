@@ -1,0 +1,137 @@
+﻿@model Tuple<IEnumerable<WebServer_DoAn.Models.LopHocPhan>, IEnumerable<WebServer_DoAn.Models.DangKyHocPhan>>
+
+@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Đăng ký & Hủy học phần";
+    var danhSachLHP = Model.Item1;
+    var daDangKy = Model.Item2;
+}
+
+<h2 class="mt-3">📝 Đăng ký học phần</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label>Học kỳ</label>
+        <select name="hocKy" class="form-select" onchange="this.form.submit()">
+            @foreach (var hk in (SelectList)ViewData["HocKy"])
+            {
+                <option value="@hk.Value" selected="@hk.Selected">@hk.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label>Năm học</label>
+        <select name="namHoc" class="form-select" onchange="this.form.submit()">
+            @foreach (var nh in (SelectList)ViewData["NamHoc"])
+            {
+                <option value="@nh.Value" selected="@nh.Selected">@nh.Text</option>
+            }
+        </select>
+    </div>
+</form>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+@if (!danhSachLHP.Any())
+{
+    <div class="alert alert-warning">
+        Hiện tại chưa có lớp học phần nào để đăng ký.
+    </div>
+}
+else
+{
+    <table class="table table-striped mt-3">
+        <thead class="table-primary">
+            <tr>
+                <th>Môn học</th>
+                <th>Tín chỉ</th>
+                <th>Phòng</th>
+                <th>Lịch học</th>
+                <th>Đã đăng ký / Tối đa</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in danhSachLHP)
+            {
+                var conCho = (item.SoLuongToiDa ?? 0) - (item.SoLuongDangKy ?? 0);
+                var hetCho = conCho <= 0;
+
+                <tr>
+                    <td>@item.MonHoc?.TenMonHoc</td>
+                    <td>@item.MonHoc?.SoTinChi</td>
+                    <td>@item.PhongHoc</td>
+                    <td>@($"{item.Thu}, Tiết {item.TietBatDau} - {item.TietKetThuc}")</td>
+                    <td>@item.SoLuongDangKy / @item.SoLuongToiDa</td>
+                    <td>
+                        @if (hetCho)
+                        {
+                            <span class="badge bg-danger">Hết chỗ</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Còn chỗ</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!hetCho)
+                        {
+                            <a asp-action="DangKy" asp-route-maLopHP="@item.MaLopHP" class="btn btn-success btn-sm">Đăng ký</a>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary btn-sm" disabled>Hết chỗ</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />
+
+<h3 class="mt-4">📤 Các học phần đã đăng ký</h3>
+
+@if (!daDangKy.Any())
+{
+    <div class="alert alert-info">
+        Bạn chưa đăng ký học phần nào.
+    </div>
+}
+else
+{
+    <table class="table table-striped mt-3">
+        <thead class="table-secondary">
+            <tr>
+                <th>Môn học</th>
+                <th>Phòng</th>
+                <th>Lịch học</th>
+                <th>Ngày đăng ký</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dk in daDangKy)
+            {
+                <tr>
+                    <td>@dk.LopHocPhan?.MonHoc?.TenMonHoc</td>
+                    <td>@dk.LopHocPhan?.PhongHoc</td>
+                    <td>@($"{dk.LopHocPhan?.Thu}, Tiết {dk.LopHocPhan?.TietBatDau} - {dk.LopHocPhan?.TietKetThuc}")</td>
+                    <td>@dk.NgayDangKy?.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a asp-action="HuyDangKy" asp-route-maDangKy="@dk.MaDangKy"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Bạn có chắc chắn muốn hủy đăng ký học phần này?');">
+                            Hủy đăng ký
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

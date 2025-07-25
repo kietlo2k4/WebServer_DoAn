@@ -1,0 +1,49 @@
+﻿@model WebServer_DoAn.ViewModel.ChinhSachHocTapViewModel
+
+<div class="mb-3">
+    <label asp-for="HocKy" class="form-label"></label>
+    <input asp-for="HocKy" class="form-control" />
+    <span asp-validation-for="HocKy" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="NamHoc" class="form-label"></label>
+    <input asp-for="NamHoc" class="form-control" />
+    <span asp-validation-for="NamHoc" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="MaNganh" class="form-label"></label>
+    <select asp-for="MaNganh" asp-items="ViewBag.Nganhs" class="form-select"></select>
+    <span asp-validation-for="MaNganh" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="TinChiToiThieu" class="form-label"></label>
+    <input asp-for="TinChiToiThieu" class="form-control" />
+    <span asp-validation-for="TinChiToiThieu" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="TinChiToiDa" class="form-label"></label>
+    <input asp-for="TinChiToiDa" class="form-control" />
+    <span asp-validation-for="TinChiToiDa" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="NgayBatDauDangKy" class="form-label"></label>
+    <input asp-for="NgayBatDauDangKy" class="form-control" type="date" />
+    <span asp-validation-for="NgayBatDauDangKy" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="NgayKetThucDangKy" class="form-label"></label>
+    <input asp-for="NgayKetThucDangKy" class="form-control" type="date" />
+    <span asp-validation-for="NgayKetThucDangKy" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="GhiChu" class="form-label"></label>
+    <textarea asp-for="GhiChu" class="form-control"></textarea>
+    <span asp-validation-for="GhiChu" class="text-danger"></span>
+</div>

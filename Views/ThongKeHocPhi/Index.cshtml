@@ -1,0 +1,94 @@
+﻿@model Tuple<decimal, decimal, IEnumerable<WebServer_DoAn.Models.ThanhToan>>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Thống kê học phí";
+
+    var tongDaThanhToan = Model.Item1;
+    var tongChuaThanhToan = Model.Item2;
+    var danhSach = Model.Item3;
+}
+
+<h2 class="mt-3">📊 Thống kê học phí</h2>
+
+<!-- Bộ lọc theo Khoa, Ngành, Lớp -->
+<form method="get" asp-action="Index" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <label class="form-label">Khoa</label>
+        <select name="maKhoa" class="form-select" asp-items="ViewBag.Khoas" onchange="this.form.submit()">
+            <option value="">-- Tất cả --</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Ngành</label>
+        <select name="maNganh" class="form-select" asp-items="ViewBag.Nganhs" onchange="this.form.submit()">
+            <option value="">-- Tất cả --</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Lớp</label>
+        <select name="maLop" class="form-select" asp-items="ViewBag.Lops" onchange="this.form.submit()">
+            <option value="">-- Tất cả --</option>
+        </select>
+    </div>
+</form>
+
+@if (!danhSach.Any())
+{
+    <div class="alert alert-info mt-3">
+        Không có dữ liệu học phí phù hợp.
+    </div>
+}
+else
+{
+    <!-- Thống kê -->
+    <div class="mb-4">
+        <h5>📝 Tổng kết</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                ✅ <strong>Tổng đã thanh toán:</strong> @string.Format("{0:N0}", tongDaThanhToan) đ
+            </li>
+            <li class="list-group-item">
+                🔷 <strong>Tổng chưa thanh toán:</strong> @string.Format("{0:N0}", tongChuaThanhToan) đ
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bảng kết quả -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>Sinh viên</th>
+                <th>Lớp</th>
+                <th>Môn học</th>
+                <th>Số tiền</th>
+                <th>Ngày thanh toán</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in danhSach)
+            {
+                <tr>
+                    <td>@item.SinhVien?.HoTen</td>
+                    <td>@item.SinhVien?.LopSinhVien?.TenLop</td>
+                    <td>@item.LopHocPhan?.MonHoc?.TenMonHoc</td>
+                    <td>@string.Format("{0:N0}", item.SoTien) đ</td>
+                    <td>@(item.NgayThanhToan?.ToString("dd/MM/yyyy") ?? "Chưa thanh toán")</td>
+                    <td>
+                        @if (item.TrangThai == "Đã thanh toán")
+                        {
+                            <span class="badge bg-success">Đã thanh toán</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Chưa thanh toán</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

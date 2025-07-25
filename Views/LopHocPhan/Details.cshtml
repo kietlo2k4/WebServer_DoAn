@@ -1,0 +1,75 @@
+﻿@model WebServer_DoAn.Models.LopHocPhan
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chi tiết lớp học phần";
+}
+
+<h2>📋 Chi tiết lớp học phần</h2>
+
+<div>
+    <h4>Thông tin lớp học phần</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Mã lớp HP</dt>
+        <dd class="col-sm-9">@Model.MaLopHP</dd>
+
+        <dt class="col-sm-3">Môn học</dt>
+        <dd class="col-sm-9">@Model.MonHoc?.TenMonHoc</dd>
+
+        <dt class="col-sm-3">Học kỳ - Năm học</dt>
+        <dd class="col-sm-9">@Model.HocKy - @Model.NamHoc</dd>
+
+        <dt class="col-sm-3">Phòng - Thứ - Tiết</dt>
+        <dd class="col-sm-9">
+            @Model.PhongHoc - Thứ @Model.Thu - Tiết @Model.TietBatDau - @Model.TietKetThuc
+        </dd>
+
+        <dt class="col-sm-3">Trạng thái</dt>
+        <dd class="col-sm-9">@Model.TrangThai</dd>
+
+        <dt class="col-sm-3">Số lượng</dt>
+        <dd class="col-sm-9">@Model.SoLuongDangKy / @Model.SoLuongToiDa</dd>
+    </dl>
+</div>
+
+<hr />
+
+<h4>📑 Danh sách sinh viên đăng ký</h4>
+
+@if (Model.DangKyHocPhans == null || !Model.DangKyHocPhans.Any())
+{
+    <div class="alert alert-info">
+        Chưa có sinh viên nào đăng ký lớp học phần này.
+    </div>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>Mã SV</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Email</th>
+                <th>Trạng thái đăng ký</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dk in Model.DangKyHocPhans)
+            {
+                <tr>
+                    <td>@dk.SinhVien?.MaSV</td>
+                    <td>@dk.SinhVien?.HoTen</td>
+                    <td>@dk.SinhVien?.NgaySinh?.ToString("dd/MM/yyyy")</td>
+                    <td>@dk.SinhVien?.GioiTinh</td>
+                    <td>@dk.SinhVien?.Email</td>
+                    <td>@dk.TrangThai</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Index" class="btn btn-secondary mt-3">⬅ Quay lại</a>

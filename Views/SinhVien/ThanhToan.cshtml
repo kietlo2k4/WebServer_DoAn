@@ -1,0 +1,28 @@
+﻿@model WebServer_DoAn.Models.ThanhToan
+
+@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Thanh toán học phí";
+}
+
+<h2>💳 Thanh toán học phí</h2>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h4>@Model.LopHocPhan.MonHoc?.TenMonHoc</h4>
+        <p><strong>Số tiền:</strong> @string.Format("{0:N0}", Model.SoTien) đ</p>
+        <p><strong>Trạng thái:</strong> @Model.TrangThai</p>
+
+        @if (Model.TrangThai != "Đã thanh toán")
+        {
+            <a asp-action="ThanhToanQR" asp-route-maThanhToan="@Model.MaThanhToan"
+               class="btn btn-primary" target="_blank">
+                📷 Xem mã QR để thanh toán
+            </a>
+        }
+        else
+        {
+            <span class="text-success">✅ Đã thanh toán</span>
+        }
+    </div>
+</div>

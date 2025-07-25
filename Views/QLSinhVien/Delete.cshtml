@@ -1,0 +1,18 @@
+﻿@model WebServer_DoAn.ViewModel.SinhVienViewModel
+
+@{
+    ViewData["Title"] = "Xóa Sinh Viên";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>❌ Xóa Sinh Viên</h2>
+
+<div class="alert alert-danger">
+    Bạn có chắc chắn muốn xóa sinh viên <strong>@Model.HoTen</strong> (@Model.MaSV)?
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="MaSV" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

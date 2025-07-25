@@ -1,0 +1,56 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #6f00ff, #8f00ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-section {
+    position: relative;
+    width: 850px;
+    background-color: transparent;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.wave-top,
+.wave-bottom {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+}
+
+.wave-top {
+    top: 0;
+}
+
+.wave-bottom {
+    bottom: 0;
+}
+
+.form-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 40px;
+    background-color: transparent;
+    min-height: 400px;
+}
+
+.form-left {
+    width: 50%;
+    color: black;
+    padding-right: 20px;
+}
+
+.form-right {
+    width: 50%;
+}

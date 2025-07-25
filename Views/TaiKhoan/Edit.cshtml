@@ -1,0 +1,31 @@
+﻿@model WebServer_DoAn.ViewModel.TaiKhoanViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa tài khoản";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="TaiKhoanDangNhap" />
+    <div class="form-group">
+        <label asp-for="TaiKhoanDangNhap"></label>
+        <input asp-for="TaiKhoanDangNhap" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MatKhau"></label>
+        <input asp-for="MatKhau" class="form-control" />
+        <span asp-validation-for="MatKhau" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VaiTro"></label>
+        <input asp-for="VaiTro" class="form-control" />
+        <span asp-validation-for="VaiTro" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">💾 Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">⬅️ Quay lại</a>
+</form>

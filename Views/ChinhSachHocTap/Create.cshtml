@@ -1,0 +1,18 @@
+﻿@model WebServer_DoAn.ViewModel.ChinhSachHocTapViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Thêm chính sách học tập";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create">
+    <partial name="_Form" />
+    <button type="submit" class="btn btn-primary">💾 Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">↩️ Quay lại</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

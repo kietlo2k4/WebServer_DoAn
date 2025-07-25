@@ -1,0 +1,27 @@
+﻿@model WebServer_DoAn.ViewModel.NganhViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Xóa ngành";
+}
+
+<h2>❌ Xóa ngành</h2>
+
+<p>Bạn có chắc chắn muốn xóa ngành này?</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Mã ngành</dt>
+    <dd class="col-sm-10">@Model.MaNganh</dd>
+
+    <dt class="col-sm-2">Tên ngành</dt>
+    <dd class="col-sm-10">@Model.TenNganh</dd>
+
+    <dt class="col-sm-2">Mã khoa</dt>
+    <dd class="col-sm-10">@Model.MaKhoa</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="MaNganh" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

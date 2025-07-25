@@ -1,0 +1,41 @@
+﻿@model WebServer_DoAn.ViewModel.ChinhSachHocTapViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chi tiết chính sách học tập";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Học kỳ</dt>
+        <dd class="col-sm-9">@Model.HocKy</dd>
+
+        <dt class="col-sm-3">Năm học</dt>
+        <dd class="col-sm-9">@Model.NamHoc</dd>
+
+        <dt class="col-sm-3">Ngành</dt>
+        <dd class="col-sm-9">@Model.TenNganh</dd>
+
+        <dt class="col-sm-3">Tín chỉ tối thiểu</dt>
+        <dd class="col-sm-9">@Model.TinChiToiThieu</dd>
+
+        <dt class="col-sm-3">Tín chỉ tối đa</dt>
+        <dd class="col-sm-9">@Model.TinChiToiDa</dd>
+
+        <dt class="col-sm-3">Ngày bắt đầu đăng ký</dt>
+        <dd class="col-sm-9">@Model.NgayBatDauDangKy?.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Ngày kết thúc đăng ký</dt>
+        <dd class="col-sm-9">@Model.NgayKetThucDangKy?.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Ghi chú</dt>
+        <dd class="col-sm-9">@Model.GhiChu</dd>
+    </dl>
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">✏️ Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">↩️ Quay lại</a>
+</p>

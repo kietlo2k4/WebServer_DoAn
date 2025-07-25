@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Tạo Lớp Học Phần";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info mt-2">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="card shadow-sm mt-4 p-4">
+    <form asp-action="TaoLopHocPhan" method="post">
+        <div class="mb-3">
+            <label for="maCTK" class="form-label">Chọn Chương Trình Khung</label>
+            <select name="maCTK" class="form-select" required>
+                <option value="">-- Chọn --</option>
+                @foreach (var ctk in ViewBag.CTKList as List<SelectListItem>)
+                {
+                    <option value="@ctk.Value">@ctk.Text</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Tạo Lớp Học Phần
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại
+        </a>
+    </form>
+</div>

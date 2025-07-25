@@ -1,0 +1,39 @@
+﻿@model WebServer_DoAn.ViewModel.MonHocViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Sửa Môn học";
+}
+
+<h2>🗑️ Xóa Môn học</h2>
+
+<h4>Bạn có chắc chắn muốn xóa môn học này?</h4>
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã Môn Học</dt>
+        <dd class="col-sm-9">@Model.MaMonHoc</dd>
+
+        <dt class="col-sm-3">Tên Môn Học</dt>
+        <dd class="col-sm-9">@Model.TenMonHoc</dd>
+
+        <dt class="col-sm-3">Loại Môn</dt>
+        <dd class="col-sm-9">@Model.LoaiMon</dd>
+
+        <dt class="col-sm-3">Số Tiết</dt>
+        <dd class="col-sm-9">@Model.SoTiet</dd>
+
+        <dt class="col-sm-3">Số Tín Chỉ</dt>
+        <dd class="col-sm-9">@Model.SoTinChi</dd>
+
+        <dt class="col-sm-3">Môn Tiên Quyết</dt>
+        <dd class="col-sm-9">@Model.MaMonTienQuyet</dd>
+
+        <dt class="col-sm-3">Ngành</dt>
+        <dd class="col-sm-9">@Model.TenNganh</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="MaMonHoc" />
+        <button type="submit" class="btn btn-danger">🗑️ Xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">↩️ Quay lại</a>
+    </form>
+</div>

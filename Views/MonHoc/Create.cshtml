@@ -1,0 +1,50 @@
+﻿@model WebServer_DoAn.ViewModel.MonHocViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Thêm Môn học";
+}
+<h2>Thêm Môn Học</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Mã Môn Học</label>
+        <input asp-for="MaMonHoc" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Tên Môn Học</label>
+        <input asp-for="TenMonHoc" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Loại Môn</label>
+        <input asp-for="LoaiMon" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Số Tiết</label>
+        <input asp-for="SoTiet" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Số Tín Chỉ</label>
+        <input asp-for="SoTinChi" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Môn Tiên Quyết</label>
+        <input asp-for="MaMonTienQuyet" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Ngành</label>
+        <select asp-for="MaNganh" asp-items="ViewBag.Nganhs" class="form-control">
+            <option value="">-- Chọn Ngành --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

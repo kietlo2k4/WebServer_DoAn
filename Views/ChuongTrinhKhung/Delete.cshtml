@@ -1,0 +1,37 @@
+﻿@model WebServer_DoAn.Models.ChuongTrinhKhung
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Xóa Chương Trình Khung";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-danger mt-3">
+    <p>Bạn có chắc chắn muốn xóa chương trình khung sau không?</p>
+</div>
+
+<div class="card mt-3 p-3 shadow-sm">
+    <dl class="row">
+        <dt class="col-sm-3">Mã CTK</dt>
+        <dd class="col-sm-9">@Model.MaCTK</dd>
+
+        <dt class="col-sm-3">Ngành</dt>
+        <dd class="col-sm-9">@Model.Nganh?.TenNganh</dd>
+
+        <dt class="col-sm-3">Môn học</dt>
+        <dd class="col-sm-9">@Model.MonHoc?.TenMonHoc</dd>
+
+        <dt class="col-sm-3">Học kỳ</dt>
+        <dd class="col-sm-9">@Model.HocKy</dd>
+
+        <dt class="col-sm-3">Bắt buộc</dt>
+        <dd class="col-sm-9">@((Model.BatBuoc) ? "✔ Có" : "✖ Không")</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="MaCTK" />
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>

@@ -1,0 +1,50 @@
+﻿@model WebServer_DoAn.Models.LopHocPhan
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Xóa Lớp Học Phần";
+}
+
+<h2 class="text-danger">🗑️ Xóa Lớp Học Phần</h2>
+
+<h4>Bạn có chắc chắn muốn xóa lớp học phần này không?</h4>
+
+<div class="alert alert-warning">
+    <strong>Chú ý:</strong> Hành động này không thể hoàn tác. Toàn bộ đăng ký, lịch học và thanh toán liên quan sẽ bị xóa!
+</div>
+
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Mã Lớp HP</dt>
+    <dd class="col-sm-9">@Model.MaLopHP</dd>
+
+    <dt class="col-sm-3">Môn học</dt>
+    <dd class="col-sm-9">@Model.MonHoc?.TenMonHoc</dd>
+
+    <dt class="col-sm-3">Phòng học</dt>
+    <dd class="col-sm-9">@Model.PhongHoc</dd>
+
+    <dt class="col-sm-3">Thứ</dt>
+    <dd class="col-sm-9">@Model.Thu</dd>
+
+    <dt class="col-sm-3">Tiết</dt>
+    <dd class="col-sm-9">@Model.TietBatDau - @Model.TietKetThuc</dd>
+
+    <dt class="col-sm-3">Sĩ số</dt>
+    <dd class="col-sm-9">@Model.SoLuongDangKy / @Model.SoLuongToiDa</dd>
+
+    <dt class="col-sm-3">Trạng thái</dt>
+    <dd class="col-sm-9">@Model.TrangThai</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="MaLopHP" />
+
+    <button type="submit" class="btn btn-danger">
+        🗑️ Xác nhận Xóa
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">
+        ↩️ Hủy
+    </a>
+</form>

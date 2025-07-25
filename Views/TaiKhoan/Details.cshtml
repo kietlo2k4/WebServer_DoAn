@@ -1,0 +1,24 @@
+﻿@model WebServer_DoAn.ViewModel.TaiKhoanViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chi tiết tài khoản";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card p-3">
+    <dl class="row">
+        <dt class="col-sm-3">Tài khoản</dt>
+        <dd class="col-sm-9">@Model.TaiKhoanDangNhap</dd>
+
+        <dt class="col-sm-3">Mật khẩu</dt>
+        <dd class="col-sm-9">@Model.MatKhau</dd>
+
+        <dt class="col-sm-3">Vai trò</dt>
+        <dd class="col-sm-9">@Model.VaiTro</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.TaiKhoanDangNhap" class="btn btn-warning">✏️ Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">⬅️ Quay lại</a>
+</div>

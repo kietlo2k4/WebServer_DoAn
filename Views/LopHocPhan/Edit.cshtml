@@ -1,0 +1,86 @@
+﻿@model WebServer_DoAn.ViewModel.LopHocPhanViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa Lớp Học Phần";
+}
+
+<h2>✏️ Chỉnh sửa Lớp Học Phần</h2>
+
+<form asp-action="Edit" method="post" class="row g-3">
+    <input type="hidden" name="id" value="@ViewBag.LopHocPhanId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-md-6">
+        <label>Môn học</label>
+        <select asp-for="MaMonHoc" class="form-select" asp-items="ViewBag.MonHocs">
+            <option value="">-- Chọn Môn học --</option>
+        </select>
+        <span asp-validation-for="MaMonHoc" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-2">
+        <label>Học kỳ</label>
+        <input asp-for="HocKy" class="form-control" />
+        <span asp-validation-for="HocKy" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-2">
+        <label>Năm học</label>
+        <input asp-for="NamHoc" class="form-control" />
+        <span asp-validation-for="NamHoc" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-2">
+        <label>Nhóm</label>
+        <input asp-for="Nhom" class="form-control" />
+        <span asp-validation-for="Nhom" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+        <label>Phòng học</label>
+        <input asp-for="PhongHoc" class="form-control" />
+        <span asp-validation-for="PhongHoc" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-2">
+        <label>Thứ</label>
+        <select asp-for="Thu" class="form-select">
+            <option value="">-- Chọn Thứ --</option>
+            <option value="2">Thứ 2</option>
+            <option value="3">Thứ 3</option>
+            <option value="4">Thứ 4</option>
+            <option value="5">Thứ 5</option>
+            <option value="6">Thứ 6</option>
+            <option value="7">Thứ 7</option>
+        </select>
+        <span asp-validation-for="Thu" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-2">
+        <label>Tiết bắt đầu</label>
+        <input asp-for="TietBatDau" class="form-control" />
+        <span asp-validation-for="TietBatDau" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-2">
+        <label>Tiết kết thúc</label>
+        <input asp-for="TietKetThuc" class="form-control" />
+        <span asp-validation-for="TietKetThuc" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+        <label>Sĩ số tối đa</label>
+        <input asp-for="SoLuongToiDa" class="form-control" />
+        <span asp-validation-for="SoLuongToiDa" class="text-danger"></span>
+    </div>
+
+    <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-primary">💾 Lưu thay đổi</button>
+        <a asp-action="Index" class="btn btn-secondary">↩️ Quay lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

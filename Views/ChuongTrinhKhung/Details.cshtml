@@ -1,0 +1,30 @@
+﻿@model WebServer_DoAn.Models.ChuongTrinhKhung
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chi tiết Chương Trình Khung";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card mt-3 p-3 shadow-sm">
+    <dl class="row">
+        <dt class="col-sm-3">Mã CTK</dt>
+        <dd class="col-sm-9">@Model.MaCTK</dd>
+
+        <dt class="col-sm-3">Ngành</dt>
+        <dd class="col-sm-9">@Model.Nganh?.TenNganh</dd>
+
+        <dt class="col-sm-3">Môn học</dt>
+        <dd class="col-sm-9">@Model.MonHoc?.TenMonHoc</dd>
+
+        <dt class="col-sm-3">Học kỳ</dt>
+        <dd class="col-sm-9">@Model.HocKy</dd>
+
+        <dt class="col-sm-3">Bắt buộc</dt>
+        <dd class="col-sm-9">@((Model.BatBuoc) ? "✔ Có" : "✖ Không")</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.MaCTK" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

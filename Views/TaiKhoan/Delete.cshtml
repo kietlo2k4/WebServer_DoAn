@@ -1,0 +1,29 @@
+﻿@model WebServer_DoAn.ViewModel.TaiKhoanViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Xóa tài khoản";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-danger">
+    <strong>Bạn có chắc chắn muốn xóa tài khoản này?</strong>
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Tài khoản</dt>
+    <dd class="col-sm-9">@Model.TaiKhoanDangNhap</dd>
+
+    <dt class="col-sm-3">Mật khẩu</dt>
+    <dd class="col-sm-9">@Model.MatKhau</dd>
+
+    <dt class="col-sm-3">Vai trò</dt>
+    <dd class="col-sm-9">@Model.VaiTro</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="TaiKhoanDangNhap" />
+    <button type="submit" class="btn btn-danger">❌ Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">⬅️ Quay lại</a>
+</form>

@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hệ thống Sinh viên</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background-color: #f8f9fa;
+            transition: all 0.3s;
+        }
+
+            .sidebar.collapsed {
+                width: 60px !important;
+            }
+
+            .sidebar .nav-link {
+                display: flex;
+                align-items: center;
+                padding: 10px 15px;
+                font-size: 16px;
+                color: #000;
+                transition: 0.3s;
+            }
+
+                .sidebar .nav-link i {
+                    width: 25px;
+                    text-align: center;
+                    font-size: 18px;
+                }
+
+            .sidebar.collapsed .nav-link span {
+                display: none;
+            }
+
+            .sidebar .toggle-btn {
+                cursor: pointer;
+                font-size: 20px;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .sidebar h5 {
+                font-weight: bold;
+                text-align: center;
+            }
+
+        .nav-link:hover {
+            background-color: #e9ecef;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-2 sidebar p-0">
+                <div class="toggle-btn bg-light" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <h5 class="py-2"><span>Sinh viên</span></h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="SinhVien" asp-action="Index">
+                            <i class="fas fa-user"></i> <span>Thông tin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="SinhVien" asp-action="ChuongTrinhKhung">
+                            <i class="fas fa-book"></i> <span>Chương trình học</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="SinhVien" asp-action="LopHocPhan">
+                            <i class="fas fa-pen"></i> <span>Đăng ký học phần</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="SinhVien" asp-action="LichHoc">
+                            <i class="fas fa-calendar-alt"></i> <span>Lịch học</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="SinhVien" asp-action="HocPhi">
+                            <i class="fas fa-coins"></i> <span>Học phí</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="SinhVien" asp-action="KetQua">
+                            <i class="fas fa-graduation-cap"></i> <span>Kết quả</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" asp-controller="Login" asp-action="Logout">
+                            <i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-10 main-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebarMenu').classList.toggle('collapsed');
+        }
+    </script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

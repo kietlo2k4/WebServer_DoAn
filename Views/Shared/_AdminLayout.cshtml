@@ -1,0 +1,162 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Admin</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background-color: #f8f9fa;
+            transition: all 0.3s;
+        }
+
+            .sidebar.collapsed {
+                width: 60px !important;
+            }
+
+            .sidebar .nav-link {
+                display: flex;
+                align-items: center;
+                padding: 10px 15px;
+                font-size: 16px;
+                color: #000;
+                transition: 0.3s;
+            }
+
+                .sidebar .nav-link i {
+                    width: 25px;
+                    text-align: center;
+                    font-size: 18px;
+                }
+
+            .sidebar.collapsed .nav-link span {
+                display: none;
+            }
+
+            .sidebar .toggle-btn {
+                cursor: pointer;
+                font-size: 20px;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .sidebar h4 {
+                font-weight: bold;
+                text-align: center;
+            }
+
+        .nav-link:hover {
+            background-color: #e9ecef;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-2 sidebar p-0">
+                <div class="toggle-btn bg-light" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <h4 class="py-2"><span>ADMIN</span></h4>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Admin">
+                            <i class="fas fa-home"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Khoa">
+                            <i class="fas fa-building"></i> <span>Khoa</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Nganh">
+                            <i class="fas fa-book"></i> <span>Ngành</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="LopSinhVien">
+                            <i class="fas fa-user-graduate"></i> <span>Lớp Sinh viên</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="QLSinhVien">
+                            <i class="fas fa-users"></i> <span>Sinh viên</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="MonHoc">
+                            <i class="fas fa-book-open"></i> <span>Môn học</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="ChuongTrinhKhung">
+                            <i class="fas fa-clipboard-list"></i> <span>CT Khung</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="LopHocPhan">
+                            <i class="fas fa-school"></i> <span>Lớp HP</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="ThongKeHocPhi">
+                            <i class="fas fa-coins"></i> <span>Thống kê Học phí</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="TaiKhoan">
+                            <i class="fas fa-key"></i> <span>Tài khoản</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="ChinhSachHocTap">
+                            <i class="fas fa-book"></i> <span>Chính sách học tập</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="KetQuaHocTap">
+                            <i class="fas fa-graduation-cap"></i> <span>Kết quả học tập</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" asp-controller="Login" asp-action="Logout">
+                            <i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-10 main-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebarMenu').classList.toggle('collapsed');
+        }
+    </script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebServer_DoAn.Models.XemLichHoc>
+
+@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Lịch học theo tuần";
+
+    Func<string, int> thuToInt = thu => thu switch
+    {
+        "Thứ 2" => 2,
+        "Thứ 3" => 3,
+        "Thứ 4" => 4,
+        "Thứ 5" => 5,
+        "Thứ 6" => 6,
+        "Thứ 7" => 7,
+        "Chủ nhật" => 8,
+        _ => 9
+    };
+
+    var lichHocSapXep = Model.OrderBy(x => thuToInt(x.Thu)).ThenBy(x => x.TietBatDau);
+}
+
+<h2 class="mt-3">📅 Lịch học theo tuần</h2>
+
+<div class="mb-3">
+    <a asp-action="ExportLichHoc" class="btn btn-success">
+        📄 Xuất PDF
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        ⚠️ Bạn chưa có lịch học nào được đăng ký.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-hover shadow mt-4">
+        <thead class="table-primary text-center">
+            <tr>
+                <th>📅 Thứ</th>
+                <th>📖 Môn học</th>
+                <th>👥 Nhóm</th>
+                <th>🕒 Tiết</th>
+                <th>🏫 Phòng</th>
+                <th>📖 Học kỳ</th>
+                <th>📆 Năm học</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lichHocSapXep)
+            {
+                <tr class="align-middle">
+                    <td class="text-center"><span class="badge bg-info">@item.Thu</span></td>
+                    <td>
+                        <strong>@item.TenMonHoc</strong><br />
+                        <small class="text-muted">Mã HP: @item.MaLopHP</small>
+                    </td>
+                    <td class="text-center"><span class="badge bg-secondary">@item.Nhom</span></td>
+                    <td class="text-center">
+                        <span class="badge bg-success">Tiết @item.TietBatDau - @item.TietKetThuc</span>
+                    </td>
+                    <td class="text-center">@item.PhongHoc</td>
+                    <td class="text-center">Học kỳ @item.HocKy</td>
+                    <td class="text-center">@item.NamHoc</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,68 @@
+﻿@model WebServer_DoAn.Models.LopSinhVien
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa Lớp Sinh Viên";
+}
+<h2>📄 Chi tiết lớp: @Model.TenLop</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Mã lớp</th>
+        <td>@Model.MaLop</td>
+    </tr>
+    <tr>
+        <th>Tên lớp</th>
+        <td>@Model.TenLop</td>
+    </tr>
+    <tr>
+        <th>Khóa học</th>
+        <td>@Model.KhoaHoc</td>
+    </tr>
+    <tr>
+        <th>Ngành</th>
+        <td>@Model.Nganh?.TenNganh (@Model.Nganh?.MaNganh)</td>
+    </tr>
+</table>
+
+<hr />
+
+<h3>👨‍🎓 Danh sách sinh viên trong lớp</h3>
+
+@if (!Model.SinhViens.Any())
+{
+    <div class="alert alert-warning">
+        🚫 Hiện tại chưa có sinh viên nào trong lớp này.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>Mã SV</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Email</th>
+                <th>SĐT</th>
+                <th>Tình trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sv in Model.SinhViens)
+            {
+                <tr>
+                    <td>@sv.MaSV</td>
+                    <td>@sv.HoTen</td>
+                    <td>@(sv.NgaySinh?.ToString("dd/MM/yyyy"))</td>
+                    <td>@sv.GioiTinh</td>
+                    <td>@sv.Email</td>
+                    <td>@sv.SDT</td>
+                    <td>@sv.TinhTrang</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Index" class="btn btn-secondary">⬅ Quay lại danh sách</a>

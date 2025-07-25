@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebServer_DoAn.Models.DangKyHocPhan>
+
+@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Kết quả học tập";
+}
+
+<h2 class="text-center my-3">📋 Kết quả học tập</h2>
+<div class="mb-3">
+    <a asp-action="XuatKetQuaHocTapPDF" class="btn btn-success">
+        📄 Xuất PDF
+    </a>
+</div>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Bạn chưa đăng ký hoặc chưa có kết quả học tập.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>Môn học</th>
+                <th>Điểm Chuyên Cần</th>
+                <th>Điểm Giữa Kỳ</th>
+                <th>Điểm Cuối Kỳ</th>
+                <th>Điểm Tổng Kết</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.LopHocPhan.MonHoc?.TenMonHoc</td>
+                    <td>@(item.DiemCC?.ToString("0.00") ?? "-")</td>
+                    <td>@(item.DiemGK?.ToString("0.00") ?? "-")</td>
+                    <td>@(item.DiemCK?.ToString("0.00") ?? "-")</td>
+                    <td>@(item.DiemTongKet?.ToString("0.00") ?? "-")</td>
+                    <td>@item.TrangThai</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

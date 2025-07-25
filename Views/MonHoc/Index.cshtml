@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebServer_DoAn.ViewModel.MonHocViewModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Sửa Môn học";
+}
+
+<h2>📚 Danh sách Môn học</h2>
+
+<form asp-action="Index" method="get" class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label>Khoa</label>
+        <select name="maKhoa" class="form-select" onchange="this.form.submit()"
+                asp-items="ViewBag.Khoas">
+            <option value="">-- Tất cả Khoa --</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label>Ngành</label>
+        <select name="maNganh" class="form-select" onchange="this.form.submit()"
+                asp-items="ViewBag.Nganhs">
+            <option value="">-- Tất cả Ngành --</option>
+        </select>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th>Mã Môn</th>
+            <th>Tên Môn</th>
+            <th>Loại Môn</th>
+            <th>Số Tiết</th>
+            <th>Số Tín Chỉ</th>
+            <th>Môn Tiên Quyết</th>
+            <th>Ngành</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaMonHoc</td>
+                <td>@item.TenMonHoc</td>
+                <td>@item.LoaiMon</td>
+                <td>@item.SoTiet</td>
+                <td>@item.SoTinChi</td>
+                <td>@item.MaMonTienQuyet</td>
+                <td>@item.TenNganh</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaMonHoc" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaMonHoc" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary mt-3">➕ Thêm mới</a>

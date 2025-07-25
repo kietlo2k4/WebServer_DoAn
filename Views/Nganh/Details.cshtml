@@ -1,0 +1,20 @@
+﻿@model WebServer_DoAn.ViewModel.NganhViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết ngành";
+}
+
+<h2>👀 Chi tiết ngành</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">Mã ngành</dt>
+    <dd class="col-sm-10">@Model.MaNganh</dd>
+
+    <dt class="col-sm-2">Tên ngành</dt>
+    <dd class="col-sm-10">@Model.TenNganh</dd>
+
+    <dt class="col-sm-2">Mã khoa</dt>
+    <dd class="col-sm-10">@Model.MaKhoa</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>

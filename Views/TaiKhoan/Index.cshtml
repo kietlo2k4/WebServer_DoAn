@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebServer_DoAn.ViewModel.TaiKhoanViewModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Danh sách tài khoản";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">➕ Thêm mới</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tài khoản</th>
+            <th>Mật khẩu</th>
+            <th>Vai trò</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TaiKhoanDangNhap</td>
+                <td>@item.MatKhau</td>
+                <td>@item.VaiTro</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TaiKhoanDangNhap" class="btn btn-warning btn-sm">✏️ Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.TaiKhoanDangNhap" class="btn btn-info btn-sm">👀 Xem</a>
+                    <a asp-action="Delete" asp-route-id="@item.TaiKhoanDangNhap" class="btn btn-danger btn-sm">❌ Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,47 @@
+﻿@model WebServer_DoAn.Models.SinhVien
+
+@{
+    Layout = "~/Views/Shared/_SinhVienLayout.cshtml";
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+
+<h2 class="mt-3">👤 Thông tin cá nhân</h2>
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>Mã sinh viên</th>
+        <td>@Model.MaSV</td>
+    </tr>
+    <tr>
+        <th>Họ tên</th>
+        <td>@Model.HoTen</td>
+    </tr>
+    <tr>
+        <th>Ngày sinh</th>
+        <td>@Model.NgaySinh?.ToString("dd/MM/yyyy")</td>
+    </tr>
+    <tr>
+        <th>Giới tính</th>
+        <td>@Model.GioiTinh</td>
+    </tr>
+    <tr>
+        <th>Lớp</th>
+        <td>@Model.LopSinhVien?.TenLop</td>
+    </tr>
+    <tr>
+        <th>Ngành</th>
+        <td>@Model.LopSinhVien?.Nganh?.TenNganh</td>
+    </tr>
+    <tr>
+        <th>Khoa</th>
+        <td>@Model.LopSinhVien?.Nganh?.Khoa?.TenKhoa</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Số điện thoại</th>
+        <td>@Model.SDT</td>
+    </tr>
+</table>

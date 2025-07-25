@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebServer_DoAn.ViewModel.ChinhSachHocTapViewModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Danh sách chính sách học tập";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">➕ Thêm mới</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Học kỳ</th>
+            <th>Năm học</th>
+            <th>Ngành</th>
+            <th>Tín chỉ Tối thiểu</th>
+            <th>Tín chỉ Tối đa</th>
+            <th>Ngày BĐ</th>
+            <th>Ngày KT</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.HocKy</td>
+                <td>@item.NamHoc</td>
+                <td>@item.TenNganh</td>
+                <td>@item.TinChiToiThieu</td>
+                <td>@item.TinChiToiDa</td>
+                <td>@item.NgayBatDauDangKy?.ToString("dd/MM/yyyy")</td>
+                <td>@item.NgayKetThucDangKy?.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">✏️ Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">👀 Xem</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

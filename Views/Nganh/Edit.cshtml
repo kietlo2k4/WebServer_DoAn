@@ -1,0 +1,28 @@
+﻿@model WebServer_DoAn.ViewModel.NganhViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Sửa ngành";
+}
+
+<h2>✏️ Sửa ngành</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="MaNganh" />
+    <div class="mb-3">
+        <label>Mã ngành</label>
+        <input asp-for="MaNganh" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label>Tên ngành</label>
+        <input asp-for="TenNganh" class="form-control" />
+        <span asp-validation-for="TenNganh" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Khoa</label>
+        <select asp-for="MaKhoa" asp-items="@(new SelectList(ViewData["MaKhoa"] as IEnumerable<SelectListItem>, "Value", "Text"))" class="form-control"></select>
+        <span asp-validation-for="MaKhoa" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

@@ -1,0 +1,32 @@
+﻿@model WebServer_DoAn.ViewModel.LopSinhVienViewModel
+
+@{
+    ViewData["Title"] = "Thêm Lớp";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>➕ Thêm lớp</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label>Mã lớp</label>
+        <input asp-for="MaLop" class="form-control" />
+        <span asp-validation-for="MaLop" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Tên lớp</label>
+        <input asp-for="TenLop" class="form-control" />
+        <span asp-validation-for="TenLop" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Khóa học</label>
+        <input asp-for="KhoaHoc" class="form-control" />
+        <span asp-validation-for="KhoaHoc" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Ngành</label>
+        <select asp-for="MaNganh" asp-items="@(ViewData["MaNganh"] as SelectList)" class="form-control"></select>
+        <span asp-validation-for="MaNganh" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
